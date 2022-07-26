@@ -1,0 +1,26 @@
+version: '3.9'
+services:
+  protonvpn:
+    container_name: "container_name"
+    environment:
+      PROTONVPN_USERNAME: "OpenVPN Username"
+      PROTONVPN_PASSWORD: "OpenVPN Password"
+      PROTONVPN_SERVER: "ProtonVPN server to connect"
+      PROTONVPN_TIER: "Proton VPN Tier "
+    image: "officialalikhani/protonvpn:protonvpn"
+    restart: unless-stopped
+    networks:
+      - internet
+      - proxy
+    cap_add:
+      - NET_ADMIN
+    devices:
+      - /dev/net/tun:/dev/net/tun
+    expose:
+      - 8000
+volumes:
+  config:
+networks:
+  internet:
+  proxy:
+    internal: true
